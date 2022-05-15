@@ -4,6 +4,7 @@ require 'vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+$status='';
 // Check if entire row is empty 
 function isRowEmpty($row){
    $is_row_empty = true;
@@ -15,14 +16,6 @@ function isRowEmpty($row){
         }
         return $is_row_empty;
 }
-function headRow($row)
-{
-
-}
-
-
-
-
 
 if(!empty($_FILES['import_file']['name']))
 {
@@ -31,40 +24,28 @@ if(!empty($_FILES['import_file']['name']))
     $fileExtn=explode('.',$file_name);
     $fileExtn=end($fileExtn);
     if(in_array($fileExtn,$validExtn)){
-    $path=$_FILES['import_file']['tmp_name'];
-    $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
-   $worksheet = $spreadsheet->getActiveSheet();
+      $status=1;
+      $path=$_FILES['import_file']['tmp_name'];
+      $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
+      $worksheet = $spreadsheet->getActiveSheet();
+    foreach ($worksheet->getRowIterator() as $row)
+    {
+        if(isRowEmpty($row))
+         {
+             echo 'Row Empty';
+         }
 
-
-foreach ($worksheet->getRowIterator() as $row) {
-
-  if(isRowEmpty($row))
-  {
-    echo 'Row Empty';
-  }
-
-    $cellIterator = $row->getCellIterator();
-    $cellIterator->setIterateOnlyExistingCells(TRUE); // This loops through all cells,
-                                      //    the default value is 'false'.
-
-    echo '<pre>';
-     print_r($cellIterator);
-    // echo $cellIterator->['currentColumnIndex:PhpOffice\PhpSpreadsheet\Worksheet\RowCellIterator:private'];
-    echo '</pre>';
-    break;
-    // foreach ($cellIterator as $cell) {
-    
-    //   echo $cell->getValue();
-    // }
+        $cellIterator = $row->getCellIterator();
+        $cellIterator->setIterateOnlyExistingCells(TRUE); // This loops through all cells,
+                                                         //    the default value is 'false'.
+                                                         // foreach ($cellIterator as $cell) {
+                                                         //   echo $cell->getValue();
+                                                         // }
+    }
   
-    
-}
-    
-   
-}else{echo 0;}
+    }else{$status=0;}
 
-}
-//  
-//      
+    echo $status;
+}    
 
 ?>

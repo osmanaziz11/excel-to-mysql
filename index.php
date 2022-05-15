@@ -14,8 +14,6 @@
 
 
 <body>
-
-
     <div class="container my-4 shadow rounded">
 
         <div class="row">
@@ -105,8 +103,8 @@
             </div>
         </div>
     </div>
-    <script src="assect/Js/jquery.js"></script>
-    <script src="assect/Js/custom.js"></script>
+    <script src="assects/Js/jquery.js"></script>
+    <script src="assects/Js/custom.js"></script>
 </body>
 
 </html>
