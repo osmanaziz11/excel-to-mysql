@@ -73,6 +73,9 @@
   border-radius: 50%;
   box-shadow: 0 42.019999999999996px 0 0 #28292f;
 }
+.h-0{
+  height: 0 !important;
+}
 .ldio-n0pe35l796m > div:nth-child(4) div:after {
   left: -7.64px;
   top: 13.37px;
